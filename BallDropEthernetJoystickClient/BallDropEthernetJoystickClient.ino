@@ -30,8 +30,8 @@ const int connectButton = A3;  // the pushbutton for connecting/disconnecting
 const int connectionLED = 3;  // this LED indicates whether you're connected
 const int leftLED = 5;        // this LED indicates that you're moving left
 const int rightLED = 6;       // this LED indicates that you're moving right
-const int upLED = 8;        // this LED indicates that you're moving left
-const int downLED = 9;       // this LED indicates that you're moving right
+const int upLED = 8;        // this LED indicates that you're moving uo
+const int downLED = 9;       // this LED indicates that you're moving down
 
 const int sendInterval = 50;  // minimum time between messages to the server
 const int debounceInterval = 15;  // used to smooth out pushbutton readings
