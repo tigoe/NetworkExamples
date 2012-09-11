@@ -33,7 +33,7 @@ const int rightLED = 6;       // this LED indicates that you're moving right
 const int upLED = 8;        // this LED indicates that you're moving uo
 const int downLED = 9;       // this LED indicates that you're moving down
 
-const int sendInterval = 50;  // minimum time between messages to the server
+const int sendInterval = 80;  // minimum time between messages to the server
 const int debounceInterval = 15;  // used to smooth out pushbutton readings
 
 int lastButtonState = 0;     // previous state of the pushbutton
@@ -64,7 +64,7 @@ void setup()
   pinMode(rightLED, OUTPUT);
   pinMode(upLED, OUTPUT);
   pinMode(downLED, OUTPUT);
-
+ 
   // configure analog pins for Adafruit joystick:
   pinMode(A0, OUTPUT);
   pinMode(A4, OUTPUT);
@@ -128,7 +128,7 @@ void loop()
     }
 
     switch (ySensor) {
-    case -1:    //up
+    case 1:    //up
       client.print("u");
       Serial.print("u");
       digitalWrite(upLED, HIGH);
@@ -138,7 +138,7 @@ void loop()
       digitalWrite(downLED, LOW);  
 
       break;
-    case 1:  // down
+    case -1:  // down
       client.print("d");
       digitalWrite(downLED, HIGH);
       break;
