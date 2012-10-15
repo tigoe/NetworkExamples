@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		// open a connection to the serial server:
+		var socket = io.connect('http://localhost:8080');
+
+		 // when you get a serialdata event, do this:
+		socket.on('serialEvent', function (data) {
+			// look for the textDisplay element in the HTML below:
+			var element = document.getElementById('textDisplay');
+			// set the stuff inside the element's HTML tags to
+			// whatever the 'value' property of the received data is:
+			element.innerHTML = data.value;
+		});
+	</script>
+
+	</head>
+	<body>
+	And the latest is:
+	<div id="textDisplay">Text will show up here</div>
+	</body>
+</html>
