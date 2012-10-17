@@ -1,0 +1,16 @@
+{
+  "name": "nodeToProcessing",
+  "version": "0.1.0",
+  "description" : "simple serial-to-broswer server application",
+  "author": {
+  	"name":"Tom Igoe"
+   },
+  "dependencies": {
+    "serialport": "1.0.x",
+    "express": "3.x"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
+}
