@@ -1,0 +1,18 @@
+{
+  "name": "SerialServer",
+  "version": "0.2.1",
+  "description" : "simple serial-to-broswer server application",
+  "keywords": "serial, socket.io, node-serialport",
+  "author": {
+  	"name":"Tom Igoe"
+   },
+  "dependencies": {
+    "serialport": "1.0.x",
+    "socket.io": "0.9.x",
+    "express": "3.x"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
+}
