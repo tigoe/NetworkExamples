@@ -16,6 +16,8 @@ const int zPin = A3;
 const int yPin = A4;
 const int xPin = A5;
 
+boolean sending = false;
+
 void setup() {
   Serial.begin(9600);
   // initialize power and ground pins for accelerometer:
@@ -26,9 +28,18 @@ void setup() {
 }
 
 void loop() {
-  // if there's no serial data, Serial.read() will return -1.
-  // this statement checks for *any* serial data, doesn't matter what:
-  if (Serial.read() != -1) {
+  // read for incoming messages. c = send, x = don't send:
+  char inChar = Serial.read();
+  switch (inChar) {
+  case 'c':    // connection open
+    sending = true;
+    break;
+  case 'x':    // connection closed
+    sending = false;
+    break;
+  }
+
+  if (sending) {
     // read sensors:
     int x = analogRead(xPin);
     delay(1);
@@ -49,5 +60,6 @@ void loop() {
     Serial.println(jsonString);
   }
 }
+
 
 
