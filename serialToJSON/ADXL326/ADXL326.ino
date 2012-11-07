@@ -1,7 +1,7 @@
 /*
   ADXL326
-  
-  Reads an ADXL326 3-axis accelerometer from Adafruit.
+ 
+ Reads an ADXL326 3-axis accelerometer from Adafruit.
  Sends the results as a JSON-formatted string like so:
  {"x":"345", "y":"432", "z":"234"}
  
@@ -26,24 +26,28 @@ void setup() {
 }
 
 void loop() {
-  // read sensors:
-  int x = analogRead(xPin);
-  delay(1);
-  int y = analogRead(yPin);
-  delay(1);
-  int z = analogRead(zPin);
+  // if there's no serial data, Serial.read() will return -1.
+  // this statement checks for *any* serial data, doesn't matter what:
+  if (Serial.read() != -1) {
+    // read sensors:
+    int x = analogRead(xPin);
+    delay(1);
+    int y = analogRead(yPin);
+    delay(1);
+    int z = analogRead(zPin);
 
-  // form a JSON-formatted string:
-  String jsonString = "{\"x\":\"";
-  jsonString += x;
-  jsonString +="\",\"y\":\"";
-  jsonString += y;
-  jsonString +="\",\"z\":\"";
-  jsonString += z;
-  jsonString +="\"}";
-  
-  // print it:
-  Serial.println(jsonString);
+    // form a JSON-formatted string:
+    String jsonString = "{\"x\":\"";
+    jsonString += x;
+    jsonString +="\",\"y\":\"";
+    jsonString += y;
+    jsonString +="\",\"z\":\"";
+    jsonString += z;
+    jsonString +="\"}";
+
+    // print it:
+    Serial.println(jsonString);
+  }
 }
 
 
