@@ -16,10 +16,10 @@
  */
 
 // constants to hold the output pin numbers:
-const int greenPin = 10;
-const int anode = 9;
-const int bluePin = 11;
-const int redPin = 8;
+const int greenPin = 11;
+const int cathode = 8;
+const int bluePin = 10;
+const int redPin = 9;
 
 int currentPin = 0; // current pin to be faded
 int brightness = 0; // current brightness level
@@ -32,32 +32,50 @@ void setup() {
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
-  pinMode(anode, OUTPUT);
-  digitalWrite(anode, HIGH);
+  pinMode(cathode, OUTPUT);
+  digitalWrite(cathode, LOW);
 }
 void loop() {
+  int brightnesss =0;
   // if there's any serial data in the buffer, read a byte:
   if (Serial.available() > 0) {
     int inByte = Serial.read(); 
 
-    // respond to the values 'r', 'g', 'b', or '0' throigh '9'.
+    // respond to the values 'r', 'g', 'b'.
     // you don't care about any other value:
-    if (inByte == 'r') {
+    switch (inByte) {
+    case'r':
       currentPin = redPin; 
-    }
-    if (inByte == 'g') {
+      break;
+    case 'g':
       currentPin = greenPin; 
-    }
-    if (inByte == 'b') {
-      currentPin = bluePin; 
-    } 
 
-    if (inByte >= '0' && inByte <= '9') {
-      // map the incoming byte value to the range of the analogRead() command:
-      brightness = map(inByte, '0', '9', 255, 0);  
-      // set the current pin to the current brightness:
-      analogWrite(currentPin, brightness);    
-    } 
+      break;
+    case 'b':
+      currentPin = bluePin; 
+      break;
+    case '/':
+      break;
+    case '\r':
+    case '\n':
+      Serial.flush();
+      break;
+    }
+
+    if (currentPin != 0){
+      Serial.println(currentPin);
+      brightness = Serial.parseInt();
+      Serial.println(brightness);
+    }
+    
+    analogWrite(currentPin, brightness);    
+    currentPin = 0;
   }
 }
+
+
+
+
+
+
 
