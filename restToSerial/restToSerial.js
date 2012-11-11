@@ -10,6 +10,7 @@
 	based on the core examples for socket.io and serialport.js
 		
 	created 5 Nov 2012
+	modified 11 Nov 2012
 	by Tom Igoe
 	
 */
@@ -33,22 +34,26 @@ console.log("Listening for new clients on port 8080");
   app.use('/js', express.static(__dirname + '/js'));
   app.use('/css', express.static(__dirname + '/css'));
 
+// respond to web GET requests with the index.html page:
+app.get('/', function (request, response) {
+  response.sendfile(__dirname + '/index.html');
+});
+
 // open the serial port. Change the name to the name of your port, just like in Processing and Arduino:
 var myPort = new SerialPort(portName, { 
 	// look for return and newline at the end of each data packet:
 	parser: serialport.parsers.readline("\r\n") 
 });
   
-// respond to web GET requests with the index.html page:
-app.get('/', function (request, response) {
-  response.sendfile(__dirname + '/index.html');
-});
 
-
+// take anything that begins with /output:
 app.get('/output*', function (request, response) {
-  var params = request.params[0];
-  myPort.write(params);
-  console.log(params);
+  // the route is the first parameter of the URL request:
+  var brightnessCommand = request.params[0];
+  // send it out the serial port:
+  myPort.write(brightnessCommand);
+  // send an HTTP header to the client:
   response.writeHead(200, {'Content-Type': 'text/html'});
-  response.end(params);
+  // send the data and close the connection:
+  response.end(brightnessCommand);
 });
