@@ -37,13 +37,13 @@ void setup() {
   digitalWrite(anode, HIGH);
 }
 void loop() {
-  
-int currentPin = 0; // current pin to be faded
 
-   // if there's any serial data in the buffer, read a byte:
+  int currentPin = 0; // current pin to be faded
+
+  // if there's any serial data in the buffer, read a byte:
   if (Serial.available() > 0) {
     int inByte = Serial.read(); 
-    
+
     // respond to the values 'r', 'g', 'b'.
     // you don't care about any other value:
     switch (inByte) {
@@ -58,21 +58,25 @@ int currentPin = 0; // current pin to be faded
       currentPin = bluePin; 
       break;
     }
-    
-    // if you have a legitimage pin number, you should get a level next.
-    // use the parseInt function to listen for it:
+
+    // if you have a legitimate pin number,
+    // use the parseInt function to listen for a level:
     if (currentPin != 0){
       int brightness = Serial.parseInt();
+
       // map the result to a level from 0 to 255
       // note: the reversal of the output values is because
       // you're using a common anode LED, and taking one of 
       // the cathodes HIGH actually turns that channel off:
       brightness = map(brightness, 0, 100, 255, 0);
+
       // set the brightness for this color:
       analogWrite(currentPin, brightness);    
     }
   }
 }
+
+
 
 
 
