@@ -3,21 +3,24 @@
  Context: Arduino
  
  Controls an RGB LED whose R, G and B legs are 
- connected to pins 11, 9, and 10, respectively.
+ connected to pins 9, 11, and 10, respectively.
  
- To control it, type 'r', 'g', or 'b' followed by
- the numerals 0 through 9. Each LED can be set at a brightness level 
- from 0 to 9.
+ To control it, send a string formmatted like so:
+ r/255/g/0/b/127
+ or r255g0b127
+ 
+ This was designed to be used with a REST or 
+ OSC-formatted command string, as shown above.
  
  created 19 July 2010
- modified 5 Nov 2012
+ modified 11 Nov 2012
  by Tom Igoe
  
  */
 
 // constants to hold the output pin numbers:
 const int greenPin = 11;
-const int cathode = 8;
+const int anode = 8;
 const int bluePin = 10;
 const int redPin = 9;
 
@@ -29,9 +32,9 @@ void setup() {
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
-  // use the cathode pin as ground and set it low:
-  pinMode(cathode, OUTPUT);
-  digitalWrite(cathode, LOW);
+  // use the anode pin as ground and set it low:
+  pinMode(anode, OUTPUT);
+  digitalWrite(anode, HIGH);
 }
 void loop() {
   
@@ -54,24 +57,20 @@ int currentPin = 0; // current pin to be faded
     case 'b':    // blue
       currentPin = bluePin; 
       break;
-    case '/':    // ignore the slashes
-      break;
-    case '\r':   // if you get a return or newline, flush the serial buffer
-    case '\n':
-      Serial.flush();
-      break;
     }
     
     // if you have a legitimage pin number, you should get a level next.
     // use the parseInt function to listen for it:
     if (currentPin != 0){
       int brightness = Serial.parseInt();
-      // map the result to a level from 0 to 255:
-      brightness = map(brightness, 0, 100, 0, 255);
+      // map the result to a level from 0 to 255
+      // note: the reversal of the output values is because
+      // you're using a common anode LED, and taking one of 
+      // the cathodes HIGH actually turns that channel off:
+      brightness = map(brightness, 0, 100, 255, 0);
       // set the brightness for this color:
       analogWrite(currentPin, brightness);    
     }
-    currentPin = 0;
   }
 }
 
