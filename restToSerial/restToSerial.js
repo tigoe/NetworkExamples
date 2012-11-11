@@ -17,7 +17,8 @@
 
 var serialport = require("serialport"),				// include the serialport library
 	SerialPort  = serialport.SerialPort,			// make a local instance of serial
-	app = require('express')(),						// start Express framework
+	express = require('express'),					// make an instance of express
+	app = express(),								// start Express framework
   	server = require('http').createServer(app),		// start an HTTP server
   	io = require('socket.io').listen(server);		// filter the server using socket.io
 
@@ -27,6 +28,10 @@ console.log("opening serial port: " + portName);	// print out the port you're li
 server.listen(8080);								// listen for incoming requests on the server
 
 console.log("Listening for new clients on port 8080");
+
+// configure server to serve static files from /js and /css:
+  app.use('/js', express.static(__dirname + '/js'));
+  app.use('/css', express.static(__dirname + '/css'));
 
 // open the serial port. Change the name to the name of your port, just like in Processing and Arduino:
 var myPort = new SerialPort(portName, { 
@@ -41,9 +46,9 @@ app.get('/', function (request, response) {
 
 
 app.get('/output*', function (request, response) {
-  var params = request.params[0]; //.split("/");
-  //var stringToSend = params.join("");
+  var params = request.params[0];
   myPort.write(params);
+  console.log(params);
   response.writeHead(200, {'Content-Type': 'text/html'});
-  response.end("you sent " + params);
+  response.end(params);
 });

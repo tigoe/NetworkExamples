@@ -1,7 +1,10 @@
-SerialToJSON.js
+restToSerial.js
 
-A serial-to-web example using node.js, node-serialport, and socket.io. This example
-converts a serial string into a JSON object and sends that via webSocket
+This example allows you to send messages to an Arduino microcontroller
+from a web page using a RESTian communications scheme. The server application
+is written in node.js using the express.js web framework and node-serialport
+for serial communications.
+
 
 To use this, you should read up on <a href="nodejs.org">node.js</a>
 
@@ -18,4 +21,6 @@ You should end up with a new directory called node_modules, which will include s
 
 To run it, enter:
 
-	node SerialToJSON.js
+	node restToSerial.js portname
+	
+Where portname is the name of your serial port.

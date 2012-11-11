@@ -18,4 +18,7 @@ You should end up with a new directory called node_modules, which will include s
 
 To run it, enter:
 
-	node SerialToJSON.js
+	node SerialToJSON.js portname
+	
+Where portname is the name of your serial port.
+

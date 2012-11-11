@@ -1,0 +1,40 @@
+REST to Serial using node.js and Arduino
+
+The address you type into your browser's address bar is often the location of a particular document on a server.  For example, http://tigoe.net/index.html refers to an HTML document living in the main directory of my server, tigoe.net. But URLs can be used to represent more than a file address. They can also be used to set or get the state of web-based application. 
+
+For example, http://www.mystore.com/item/3045/price could be used to tell the application you want the price of item 3045. If you want the set the price, you could use http://www.mystore.com/item/3045/price/4.99. Web frameworks like Sinatra (for Ruby), Flask (for Python) and Express (for JavaScript through node.js) make it possible for you to build a web server that uses REST as the control protocol for your application. 
+
+For more on REST, see (links here)
+
+In this post, you'll learn how to use a RESTian scheme as a communications protocol between a microcontroller and a web page using node.js and a little client-side JavaScript in the middle. 
+
+(break)
+
+This post assumes you know:
+
+lkjlkjsldfkjsfd
+
+
+In the previous post, you learned how to use JavaScript Object Notation (JSON) and websockets to do something simiar to this. Both schemes have their advantages and disadvantages. While JSON is efficient for the programming of your application, using a REST scheme gives you a way to address the server without needing any client-side programming. This can be useful if you want to control a web application directly from a browser's address bar, or if you want to control it from another application entirely, just by making a HTTP call.
+
+
+The application you'll build in this lesson is very simple. You'll control an RGB LED attachec to a microcontroller through an HTTP call. When you're done, you'll be able to set the intensity of the red, green, and blue channels from your browser, or from any other application that can make an HTTP call. 
+
+The communications protocol for this application looks like this:
+
+/output/r/level - sets the level of the red LED (range from 0 to 100)
+/output/g/level - sets the level of the green LED (range from 0 to 100)
+/output/b/level - sets the level of the blue LED (range from 0 to 100)
+
+The full address for your HTTP call might look like this:
+
+http://www.example.com/output/r/34
+
+Although this application doesn't do anything other than control the LED outputs, you're using the command "output" at the beginnng of the protocol for the server's sake. That way you can add otehr commands later if you like. The server won't pass the "output" command on to the Arduino, it'll just pass on the values to be set.
+
+You can also make combinations of colors. For example, /output/r/45/g/23/b/100 would set the red level to 45, the green level to 23, and the blue level to 100. As long as you have a color letter followed by a level, separated by slashes, you're good. 
+
+
+The Arduino Sketch
+
+First, make an Arduino sketch that can read this protocol. 

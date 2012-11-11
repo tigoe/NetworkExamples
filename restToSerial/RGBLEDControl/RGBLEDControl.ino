@@ -21,9 +21,6 @@ const int cathode = 8;
 const int bluePin = 10;
 const int redPin = 9;
 
-int currentPin = 0; // current pin to be faded
-int brightness = 0; // current brightness level
-
 void setup() {
   // initiate serial communication:
   Serial.begin(9600);
@@ -32,46 +29,52 @@ void setup() {
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
+  // use the cathode pin as ground and set it low:
   pinMode(cathode, OUTPUT);
   digitalWrite(cathode, LOW);
 }
 void loop() {
-  int brightnesss =0;
-  // if there's any serial data in the buffer, read a byte:
+  
+int currentPin = 0; // current pin to be faded
+
+   // if there's any serial data in the buffer, read a byte:
   if (Serial.available() > 0) {
     int inByte = Serial.read(); 
-
+    
     // respond to the values 'r', 'g', 'b'.
     // you don't care about any other value:
     switch (inByte) {
-    case'r':
+    case'r':     // red
       currentPin = redPin; 
       break;
-    case 'g':
+    case 'g':    // green
       currentPin = greenPin; 
 
       break;
-    case 'b':
+    case 'b':    // blue
       currentPin = bluePin; 
       break;
-    case '/':
+    case '/':    // ignore the slashes
       break;
-    case '\r':
+    case '\r':   // if you get a return or newline, flush the serial buffer
     case '\n':
       Serial.flush();
       break;
     }
-
-    if (currentPin != 0){
-      Serial.println(currentPin);
-      brightness = Serial.parseInt();
-      Serial.println(brightness);
-    }
     
-    analogWrite(currentPin, brightness);    
+    // if you have a legitimage pin number, you should get a level next.
+    // use the parseInt function to listen for it:
+    if (currentPin != 0){
+      int brightness = Serial.parseInt();
+      // map the result to a level from 0 to 255:
+      brightness = map(brightness, 0, 100, 0, 255);
+      // set the brightness for this color:
+      analogWrite(currentPin, brightness);    
+    }
     currentPin = 0;
   }
 }
+
 
 
 
