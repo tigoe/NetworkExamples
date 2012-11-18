@@ -1,7 +1,7 @@
 {
-  "name": "SerialServer",
-  "version": "0.2.1",
-  "description" : "simple serial-to-broswer server application",
+  "name": "restToSerial",
+  "version": "0.3",
+  "description" : "A browser-to-serial application using RESTian URL calls",
   "keywords": "serial, node-serialport",
   "author": {
   	"name":"Tom Igoe"
