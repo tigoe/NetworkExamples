@@ -20,8 +20,8 @@ var serialport = require("serialport"),				// include the serialport library
 	SerialPort  = serialport.SerialPort,			// make a local instance of serial
 	express = require('express'),					// make an instance of express
 	app = express(),								// start Express framework
-  	server = require('http').createServer(app),		// start an HTTP server
-  	io = require('socket.io').listen(server);		// filter the server using socket.io
+  	server = require('http').createServer(app);		// start an HTTP server
+  	//io = require('socket.io').listen(server);		// filter the server using socket.io
 
 var portName = process.argv[2];						// third word of the command line should be serial port name
 console.log("opening serial port: " + portName);	// print out the port you're listening on
@@ -49,7 +49,11 @@ var myPort = new SerialPort(portName, {
 // take anything that begins with /output:
 app.get('/output*', function (request, response) {
   // the route is the first parameter of the URL request:
-  var brightnessCommand = request.params[0];
+  var params = request.params[0].split("/");
+  var brightnessCommand = params.join("");
+  
+  console.log("received "+brightnessCommand);
+
   // send it out the serial port:
   myPort.write(brightnessCommand);
   // send an HTTP header to the client:
