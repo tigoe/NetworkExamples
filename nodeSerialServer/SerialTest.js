@@ -17,7 +17,7 @@ var myPort = new SerialPort("/dev/cu.usbmodem621", {
 });
   
   
-// if there's a socket client, listen for new serial data:  
+// if there's any serial data to read, read it:  
 myPort.on('data', function (data) {
 	// for debugging, you should see this in Terminal:
 	console.log(data);
