@@ -18,15 +18,15 @@
 */
 
 
-var serialport = require("serialport"),				// include the serialport library
-	SerialPort  = serialport.SerialPort,				// make a local instance of serial
-	app = require('express')(),							// start Express framework
-  	server = require('http').createServer(app),		// start an HTTP server
-  	io = require('socket.io').listen(server),			// filter the server using socket.io
-  	serialData = {},											// object to hold what goes out to the client
-  	portName = process.argv[2];							// third word of the command line should be serial port name
+var serialport = require("serialport"),			// include the serialport library
+	SerialPort  = serialport.SerialPort,			// make a local instance of serial
+	app = require('express')(),						// start Express framework
+  	server = require('http').createServer(app),	// start an HTTP server
+  	io = require('socket.io').listen(server),		// filter the server using socket.io
+  	serialData = {},										// object to hold what goes out to the client
+  	portName = process.argv[2];						// third word of the command line should be serial port name
 
-server.listen(8080);											// listen for incoming requests on the server
+server.listen(8080);										// listen for incoming requests on the server
 
 console.log("Listening for new clients on port 8080");
 
