@@ -5,7 +5,7 @@
  Controls an RGB LED whose R, G and B legs are 
  connected to pins 9, 11, and 10, respectively.
  
- To control it, send a string formmatted like so:
+ To control it, send a string formatted like so:
  r/255/g/0/b/127
  or r255g0b127
  
