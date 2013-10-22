@@ -3,7 +3,7 @@
  Context: Arduino
  
  Controls an RGB LED whose R, G and B legs are 
- connected to pins 9, 11, and 10, respectively.
+ connected to pins 9, 10, and 11, respectively.
  
  To control it, send a string formatted like so:
  r/255/g/0/b/127
@@ -19,9 +19,9 @@
  */
 
 // constants to hold the output pin numbers:
-const int greenPin = 11;
+const int greenPin = 10;
 const int anode = 8;
-const int bluePin = 10;
+const int bluePin = 11;
 const int redPin = 9;
 
 void setup() {
@@ -35,6 +35,11 @@ void setup() {
   // use the anode pin as ground and set it low:
   pinMode(anode, OUTPUT);
   digitalWrite(anode, HIGH);
+  // set the color pins high to turn off the LED:
+  digitalWrite(redPin, HIGH);
+  digitalWrite(greenPin, HIGH);
+  digitalWrite(bluePin, HIGH);
+
 }
 void loop() {
 
@@ -75,3 +80,4 @@ void loop() {
     }
   }
 }
+
