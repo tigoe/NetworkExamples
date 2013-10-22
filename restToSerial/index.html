@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
-		<style type="text/css">
-			#redSlider {position: fixed; top: 10px; left:20px}
-			#redLabel {color:#dd0000; position: fixed; top: 120px; left:20px}
-			#greenSlider {position: fixed; top: 10px; left:70px}
-			#greenLabel {color:#00aa00; position: fixed; top: 120px; left:70px}
-			#blueSlider {position: fixed; top: 10px; left: 120px}
-			#blueLabel {color:#0000dd; position: fixed; top: 120px; left: 120px}
-		</style>
-		<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
-		<script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
-		<script type="text/javascript" src="js/sliders.js"></script>
-		</head>
+    <script type="text/javascript" src="js/zepto.min.js"></script>
+	 <script type="text/javascript">
+		function setColor(ui, display) {
+			display.value= ui.value;
+			$.get("/output/"+ display.id + "/" + ui.value);
+		}
+	 </script>
+    <style>
+    	#r{color:#cc0000;}    	
+    	#g{color:#00cc00;}	
+    	#b{color:#0000cc;}
+    </style>
+	 </head>
 	<body>
-	
+		
 	<!-- Slider -->
-		<div id="redSlider" style="slider"></div>
-		<div id="redLabel">0</div>
-		<div id="greenSlider" style="slider2"></div>
-		<div id="greenLabel">0</div>
-		<div id="blueSlider" style="slider3"></div>
-		<div id="blueLabel">0</div>
+	
+	<input type="range" id="redSlider" min="1" max="100" onchange="setColor(this, r);">
+	<input type="text" id="r" size=2><br>
+	
+	<input type="range" id="greenSlider" min="1" max="100" onchange="setColor(this, g);">
+	<input type="text" id="g" size=2><br>
+	
+	<input type="range" id="blueSlider" min="1" max="100" onchange="setColor(this, b);">
+	<input type="text" id="b" size=2><br>
+	
 	</body>
 </html>
