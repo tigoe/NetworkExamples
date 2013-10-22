@@ -10,7 +10,7 @@
 	based on the core examples for socket.io and serialport.js
 		
 	created 5 Nov 2012
-	modified 11 Nov 2012
+	modified 19 Oct 2013
 	by Tom Igoe
 	
 */
@@ -38,7 +38,7 @@ app.get('/', function (request, response) {
   response.sendfile(__dirname + '/index.html');
 });
 
-// open the serial port. Change the name to the name of your port, just like in Processing and Arduino:
+// open the serial port. Uses the command line parameter:
 var myPort = new SerialPort(portName, { 
 	// look for return and newline at the end of each data packet:
 	parser: serialport.parsers.readline("\r\n") 

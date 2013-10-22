@@ -1,6 +1,6 @@
 {
   "name": "restToSerial",
-  "version": "0.3",
+  "version": "0.3.1",
   "description" : "A browser-to-serial application using RESTian URL calls",
   "keywords": "serial, node-serialport",
   "author": {
@@ -13,7 +13,5 @@
   "engines": {
     "node": "0.10.x",
     "npm": "1.3.x"
-  }
-
   }
 }
