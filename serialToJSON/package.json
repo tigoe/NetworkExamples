@@ -1,5 +1,5 @@
 {
-  "name": "SerialServer",
+  "name": "serialToJSON",
   "version": "0.2.1",
   "description" : "simple serial-to-broswer server application",
   "keywords": "serial, socket.io, node-serialport",
