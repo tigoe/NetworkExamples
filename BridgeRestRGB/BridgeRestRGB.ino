@@ -121,7 +121,7 @@ void process(YunClient client) {
       // set the brightness for this color:
       analogWrite(currentPin, brightness);    
     }
-  }
+  } 
 }
 
 
