@@ -1,0 +1,19 @@
+{
+  "name": "nodeThermostat",
+  "version": "0.0.1",
+  "description" : "demonstrates CSV to browser",
+  "keywords": "serial, socket.io, node-serialport",
+  "author": {
+  	"name":"Tom Igoe"
+   },
+  "dependencies": {
+    "serialport": "1.1.x",
+    "socket.io": "0.9.x",
+    "express": "3.x",
+    "open": ">=0.0.4"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.3.x"
+  }
+}
