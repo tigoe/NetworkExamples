@@ -10,7 +10,7 @@
 	based on the core examples for socket.io and serialport.js
 		
 	created 21 Aug 2012
-	modified 19 Dec 2013
+	modified 19 Jan 2014
 	by Tom Igoe
 	
 	Patches and improvements suggested by Steve Klise, Lia Martinez, and Will Jennings
