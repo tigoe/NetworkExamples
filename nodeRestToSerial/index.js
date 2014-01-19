@@ -17,12 +17,12 @@
 
 
 var serialport = require("serialport"),				// include the serialport library
-	SerialPort  = serialport.SerialPort,			// make a local instance of serial
-	express = require('express'),					// make an instance of express
-	app = express(),								// start Express framework
+	SerialPort  = serialport.SerialPort,			   // make a local instance of serial
+	express = require('express'),					      // make an instance of express
+	app = express(),								         // start Express framework
   	server = require('http').createServer(app);		// start an HTTP server
  
-var portName = process.argv[2];						// third word of the command line should be serial port name
+var portName = process.argv[2];						   // third word of the command line is serial port name
 console.log("opening serial port: " + portName);	// print out the port you're listening on
 
 server.listen(8080);								// listen for incoming requests on the server
