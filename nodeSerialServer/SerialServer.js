@@ -6,13 +6,13 @@
 		* express.js (http://expressjs.com/)
 		* socket.io (http://socket.io/#how-to-use)
 		* serialport.js (https://github.com/voodootikigod/node-serialport)
-		
+
 	based on the core examples for socket.io and serialport.js
-		
+
 	created 21 Aug 2012
 	modified 14 Oct 2013
 	by Tom Igoe
-	
+
 	Patches and improvements suggested by Steve Klise, Lia Martinez, and Will Jennings
 
 */
@@ -20,22 +20,22 @@
 
 var serialport = require("serialport"),			// include the serialport library
 	SerialPort  = serialport.SerialPort,			// make a local instance of serial
-	app = require('express')(),						// start Express framework
+	app = require('express')(),						    // start Express framework
   	server = require('http').createServer(app),	// start an HTTP server
   	io = require('socket.io').listen(server),		// filter the server using socket.io
-  	serialData = {},										// object to hold what goes out to the client
-  	portName = process.argv[2];						// third word of the command line should be serial port name
+  	serialData = {},										    // object to hold what goes out to the client
+  	portName = process.argv[2];						  // third word of the command line should be serial port name
 
-server.listen(8080);										// listen for incoming requests on the server
+server.listen(8080);										    // listen for incoming requests on the server
 
 console.log("Listening for new clients on port 8080");
 
 // open the serial port. Change the name to the name of your port, just like in Processing and Arduino:
-var myPort = new SerialPort(portName, { 
+var myPort = new SerialPort(portName, {
 	// look for return and newline at the end of each data packet:
-	parser: serialport.parsers.readline("\r\n") 
+	parser: serialport.parsers.readline("\r\n")
 });
-  
+
 // respond to web GET requests with the index.html page:
 app.get('/', function (request, response) {
   response.sendfile(__dirname + '/index.html');
@@ -43,7 +43,7 @@ app.get('/', function (request, response) {
 
 // listen for new socket.io connections:
 io.sockets.on('connection', function (socket) {
-	// if there's a socket client, listen for new serial data:  
+	// if there's a socket client, listen for new serial data:
 	myPort.on('data', function (data) {
 		// set the value property of scores to the serial string:
 		serialData.value = data;
