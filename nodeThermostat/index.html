@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="/socket.io/socket.io.js"></script>
+
+
+	<script>
+		// open a connection to the serial server:
+		var socket = io.connect('http://localhost:8080');
+
+		 // when you get a serialdata event, do this:
+		socket.on('serialEvent', function (data) {
+         setPoint.innerHTML = data.setPoint;
+         temperature.innerHTML = data.temp;
+         if (data.setPoint > data.temp) {
+            state.innerHTML = "warming";
+         }
+         if (data.setPoint < data.temp) {
+                 state.innerHTML = "cooling";       
+         }
+         drawCurve("setPointDial",data.temp, data.setPoint);
+		});
+		
+		function drawCurve(thisCurve, current, target) {
+   		   var c=document.getElementById(thisCurve);
+            var ctx=c.getContext("2d");
+            ctx.clearRect ( 0 , 0 , 200 , 200   );
+            ctx.beginPath();
+            var startPoint =0.7*Math.PI ;
+            var endPoint = 2.3*Math.PI * (target / 30);
+            ctx.arc(75,75,50,startPoint,endPoint);
+            ctx.strokeStyle="red";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+             ctx.beginPath();
+             startPoint =0.7*Math.PI ;
+             endPoint = 2.3*Math.PI * (current / 30);
+            ctx.arc(75,75,45,startPoint,endPoint);
+            ctx.strokeStyle="green";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+		}
+
+	</script>
+	  <style>
+    	#temperature{
+          background:#cc0000;
+          color:#ffffff;
+          width:20px;
+          height: 20px;
+    	}    	
+    	#setPoint{
+       	 background:#00cc00;
+          color:#ffffff;
+          width:20px;
+          height: 20px;
+    	}	
+    </style>
+
+	</head>
+	<body>
+		<canvas id="setPointDial" width="150" height="150" style="border:0px;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+	And the latest is:
+	<div id="temperature">Text will show up here</div>
+	<div id="setPoint">Text will show up here</div>
+	<div id="state">state</div>
+
+
+	</body>
+</html>

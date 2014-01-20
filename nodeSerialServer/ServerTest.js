@@ -5,10 +5,8 @@
 
 
 var app = require('express')(),						// start Express framework
-  	server = require('http').createServer(app),		// start an HTTP server
+  	server = require('http').createServer(app),	// start an HTTP server
   	io = require('socket.io').listen(server);		// filter the server using socket.io
-
-var serialData = {};								// object to hold what goes out to the client
 
 server.listen(8080);								// listen for incoming requests on the server
   
@@ -19,8 +17,7 @@ app.get('/', function (request, response) {
 
 // listen for new socket.io connections:
 io.sockets.on('connection', function (socket) {
-	serialData.value = "Hello";
-	// send a serial event to the web client with the data:
-	socket.emit('serialEvent', serialData);
+	// send something to the web client with the data:
+	socket.emit('serialEvent', "Hello");
 });
 

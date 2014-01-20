@@ -3,11 +3,12 @@
     <head>
     <script type="text/javascript" src="js/zepto.min.js"></script>
 	 <script type="text/javascript">
-		function setColor(ui, display) {
-			display.value= ui.value;
-			$.get("/output/"+ display.id + "/" + ui.value);
+		function setColor(slider, textbox) {
+			textbox.value= slider.value;
+			$.get("/output/"+ textbox.id + "/" + slider.value);
 		}
 	 </script>
+	 
     <style>
     	#r{color:#cc0000;}    	
     	#g{color:#00cc00;}	

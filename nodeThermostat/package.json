@@ -1,7 +1,7 @@
 {
-  "name": "SerialServer",
-  "version": "0.2.1",
-  "description" : "simple serial-to-broswer server application",
+  "name": "nodeThermostat",
+  "version": "0.0.1",
+  "description" : "demonstrates CSV to browser",
   "keywords": "serial, socket.io, node-serialport",
   "author": {
   	"name":"Tom Igoe"

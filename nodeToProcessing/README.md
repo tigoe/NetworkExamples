@@ -15,7 +15,7 @@ Enter the following:
 
 You should end up with a new directory called node_modules, which will include socket.io, node-serialport, and express.js.
 
-Install ADXK326.ino onto an Arduino Uno or Leonardo or Mega that has an ADXL326 acclerometer breakout board from Adafruit attached.
+Install ADXL326.ino onto an Arduino Uno or Leonardo or Mega that has an ADXL326 acclerometer breakout board from Adafruit attached.
 
 To run the server, enter:
 

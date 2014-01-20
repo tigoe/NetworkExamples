@@ -8,11 +8,9 @@
 
 		 // when you get a serialdata event, do this:
 		socket.on('serialEvent', function (data) {
-			// look for the textDisplay element in the HTML below:
-			var element = document.getElementById('textDisplay');
 			// set the stuff inside the element's HTML tags to
 			// whatever the 'value' property of the received data is:
-			element.innerHTML = data.value;
+			textDisplay.innerHTML = data;
 		});
 	</script>
 
