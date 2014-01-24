@@ -1,6 +1,7 @@
 /*
-	serialServer.js
-	a node.js app to read serial strings and send them to webSocket clients
+	thermostat
+	a node.js app to communicate between a serial thermostat device
+	and a web client version of the same. 
 	requires:
 		* node.js (http://nodejs.org/)
 		* express.js (http://expressjs.com/)
@@ -9,11 +10,8 @@
 		
 	based on the core examples for socket.io and serialport.js
 		
-	created 21 Aug 2012
-	modified 19 Jan 2014
+	created 21 Jan 2014
 	by Tom Igoe
-	
-	Patches and improvements suggested by Steve Klise, Lia Martinez, and Will Jennings
 
 */
 
@@ -27,10 +25,15 @@ var serialport = require("serialport"),		// include the serialport library
 	open = require('open'),                   // used to open the browser
 	url = 'http://localhost:8080';            // URL to open in the browser
  
-var app = express(),								   // start Express framework
-   server = require('http').createServer(app);		// start an HTTP server
+var app = express(),								      // start Express framework
+   server = require('http').createServer(app);	// start an HTTP server
   	io = require('socket.io').listen(server);		// listen for websocket requests
   	
+
+// set up static folders for client-side JavaScript and CSS:
+app.use('/js', express.static(__dirname + '/js'));
+app.use('/css', express.static(__dirname + '/css'));
+
 var thermostat = {
    "temp": "0.0",
    "setPoint": "0.0"
@@ -58,17 +61,27 @@ app.get('/', function (request, response) {
   response.sendfile(__dirname + '/index.html');
 });
 
+
 // listen for new socket.io connections:
 io.sockets.on('connection', function (socket) {
    // if there's a socket client, listen for new serial data:  
    myPort.on('data', function (data) {
-      // for debugging, you should see this in Terminal:
+      // split the incoming data values on the comma:
       var values = data.split(',');
+      // you now have two values in the array:
+      // temp, followed by setPoint:
       thermostat.setPoint = parseFloat(values[0]);
       thermostat.temp = parseFloat(values[1]);
-      
       
       // send a serial event to the web client with the data:
       socket.emit('serialEvent', thermostat);
 	});
+	
+	// if you get incoming data from the client, it'll be
+	// the updated setPoint. Send it out the serial port:
+	socket.on('socketEvent', function (data) {
+		myPort.write(data.setPoint + '\n');
+	});
 });
+
+
