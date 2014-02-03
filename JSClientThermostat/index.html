@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/javascript" src="thermostat.js"></script>
+	</head>
+	<body onload="setup();">
+	<h1>Thermostat</h1>
+	Current Temperature: <meter id="temperature" min="0" max="40" value="15"></meter>
+		<span id="tempLabel">15</span>&deg;C
+	<br>
+	Desired Temperature: <input type="range" id="setPoint" min="10" max="30" step="0.1" value="15">
+		<span id="setPointLabel">15</span>&deg;C
+	<br>
+	System Status: <span id="statusLabel">off</span>
+	</body>
+</html>

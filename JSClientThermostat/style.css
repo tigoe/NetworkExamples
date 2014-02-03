@@ -1,0 +1,11 @@
+body {
+	background: #2e3f88;
+	color: #ededed;
+	font-family: "Helvetica", sans-serif;
+	font-weight: lighter;
+	letter-spacing: 1.5px;
+}
+
+#temperature {
+	width:130px;
+}
