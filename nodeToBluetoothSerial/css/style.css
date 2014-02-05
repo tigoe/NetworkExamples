@@ -1,0 +1,40 @@
+ 	#fwdButton {
+ 		position: fixed;
+	 	top: 10px;
+	 	left: 160px;	
+ 	}
+ 	#backButton {
+ 		position: fixed;
+	 	top: 150px;
+	 	left: 170px;	
+ 	}
+ 	#urButton {
+ 		position: fixed;
+	 	top: 60px;
+	 	left: 10px;	
+ 	}
+ 	#rButton {
+ 		position: fixed;
+	 	top: 90px;
+	 	left: 40px;	
+ 	}
+ 	#ulButton {
+ 		position: fixed;
+	 	top: 60px;
+	 	left: 280px;	
+ 	}
+ 	#lButton {
+ 		position: fixed;
+	 	top: 90px;
+	 	left: 310px;	
+ 	}
+ 	#stopButton {
+ 		position: fixed;
+	 	top: 60px;
+	 	left: 170px;	
+ 	}
+ 	#endButton {
+ 		position: fixed;
+	 	top: 90px;
+	 	left: 130px;	
+ 	}
