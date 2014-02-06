@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript">
+			function setup() {
+				// start the clock
+				setInterval(tick, 1000);	
+			}
+			
+			function tick() {
+				// get the div that the clock should be in:
+				var myClock = document.getElementById('clock');
+				// get the date:
+				var now = new Date();
+				// put the date in the div:
+				myClock.innerHTML = now;
+			}
+		</script>
+		
+	</head>
+	<body onload="setup();">
+		<div id="clock">What time is it?</div>
+	</body>
+</html>
