@@ -1,0 +1,18 @@
+{
+  "name": "serialToRest",
+  "version": "0.0.1",
+  "description" : "A serial-to-browser application using RESTful URL calls",
+  "keywords": "serial, node-serialport",
+  "author": {
+  	"name":"Tom Igoe"
+   },
+  "dependencies": {
+    "serialport": "1.3.x",
+    "express": "3.x", 
+    "open": ">=0.0.4"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.3.x"
+  }
+}

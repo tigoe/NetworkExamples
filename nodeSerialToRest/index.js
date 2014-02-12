@@ -1,16 +1,15 @@
 /*
-	restToSerial
-	a node.js app to read take requests and send as serial data
+	serialToRest
+	a node.js app to read take requests and reply with serial data
 	requires:
 		* node.js (http://nodejs.org/)
 		* express.js (http://expressjs.com/)
 		* socket.io (http://socket.io/#how-to-use)
 		* serialport.js (https://github.com/voodootikigod/node-serialport)
 		
-	based on the core examples for socket.io and serialport.js
-		
+				
 	created 5 Nov 2012
-	modified 19 Jan 2014
+	modified 11 Feb 2014
 	by Tom Igoe
 	
 */
@@ -56,15 +55,21 @@ app.get('/', function (request, response) {
   
 
 // take anything that begins with /output:
-app.get('/output/*', function (request, response) {
-  // the route is the first parameter of the URL request:
-  var brightnessCommand = request.params[0];  
-  console.log("received "+ brightnessCommand);
+app.get('/analog/*', function (request, response) {
+  // the first parameter after /analog/ is the channel number:
+  var channel = request.params[0];  
+  console.log("getting channel: "+ channel + "...");
 
-  // send it out the serial port:
-  myPort.write(brightnessCommand);
-  // send an HTTP header to the client:
-  response.writeHead(200, {'Content-Type': 'text/html'});
-  // send the data and close the connection:
-  response.end(brightnessCommand);
+  // send it out the serial port and wait for a response:
+  myPort.write(channel, function() {
+		// send an HTTP header to the client:
+		response.writeHead(200, {'Content-Type': 'text/html'}); 
+
+		// when you get a response from the serial port, write it out to the client: 
+		myPort.on('data', function(data) {
+  	  		// send the data and close the connection:
+  	  		response.write(data);
+  	  		response.end();
+  	  	});    
+  }); 
 });
