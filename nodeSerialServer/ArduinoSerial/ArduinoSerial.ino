@@ -12,6 +12,7 @@ void setup() {
   Serial.begin(9600);
   // set serial receive timeout to 10ms:
   Serial.setTimeout(10);
+  pinMode(13, OUTPUT);
 }
 
 // the loop routine runs over and over again forever:
