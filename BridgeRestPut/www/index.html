@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
+	<script type="text/javascript">
+		function getTemperature() {
+		$.get("/data/get/temperature/", function(response) {
+					// set the temperature span's text
+					// using the response you get from the server:
+					temperature.innerHTML = response.value;
+				});		
+			}
+			
+		getTemperature();		// set the initial temperature
+		setInterval(getTemperature, 10000);	// set the timer to check temp every 10 seconds
+	</script>
+	</head>
+	<body>
+	Temperature: <span id="temperature"></span>&deg;C
+	</body>
+</html>
