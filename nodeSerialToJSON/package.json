@@ -1,13 +1,13 @@
 {
-  "name": "serialToJSON",
-  "version": "0.2.1",
+  "name": "nodeSerialToJSON",
+  "version": "0.2.2",
   "description" : "simple serial-to-broswer server application",
   "keywords": "serial, socket.io, node-serialport",
   "author": {
   	"name":"Tom Igoe"
    },
   "dependencies": {
-    "serialport": "1.1.x",
+    "serialport": "1.4.x",
     "socket.io": "0.9.x",
     "express": "3.x"
   },
