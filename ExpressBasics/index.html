@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	 <script type="text/javascript" src="js/zepto.min.js"></script>
+
+	<script type="text/javascript">
+		//this function makes an HTTP GET request for /name/username		
+		function submitName(myName) {
+			$.get("/name/" + myName, success);		
+		}
+		
+		//this function makes an HTTP GET request for /name
+		// since it's not submitting a name, the server will return
+		// whatever the current name is:
+		function getName(myName) {
+			$.get("/name/", success);		
+		}
+
+		// this function is run when either of the other two 
+		// gets a result from the server. The result from the server is 
+		// the data. The function uses this to set the username field:
+		function success(data) {	
+			username.value = data;
+		}
+	</script>
+	
+	</head>
+	<body>
+	
+	<div id="time"></div>
+	What's your name: 
+	<input type="text" id="username" size=50><br>
+	<button id="submitName" onclick="submitName(username.value);">Submit name</button>
+	<button id="getName" onclick="getName(username.value);">Get Name</button>
+	</body>
+</html>
