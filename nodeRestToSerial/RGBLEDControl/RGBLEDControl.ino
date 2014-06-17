@@ -3,7 +3,8 @@
  Context: Arduino
  
  Controls an RGB LED whose R, G and B legs are 
- connected to pins 9, 10, and 11, respectively.
+ connected to pins 3, 6, and 6, respectively.
+ This is for a common cathode RGB LED.
  
  To control it, send a string formatted like so:
  r/255/g/0/b/127
@@ -13,16 +14,16 @@
  OSC-formatted command string, as shown above.
  
  created 19 July 2010
- modified 11 Nov 2012
+ modified 17 Jun 2014
  by Tom Igoe
  
  */
 
 // constants to hold the output pin numbers:
-const int greenPin = 10;
-const int anode = 8;
-const int bluePin = 11;
-const int redPin = 9;
+const int greenPin = 6;
+const int cathode = 4;
+const int bluePin = 5;
+const int redPin = 3;
 
 void setup() {
   // initiate serial communication:
@@ -33,12 +34,12 @@ void setup() {
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
   // use the anode pin as ground and set it low:
-  pinMode(anode, OUTPUT);
-  digitalWrite(anode, HIGH);
+  pinMode(cathode, OUTPUT);
+  digitalWrite(cathode, LOW);
   // set the color pins high to turn off the LED:
-  digitalWrite(redPin, HIGH);
-  digitalWrite(greenPin, HIGH);
-  digitalWrite(bluePin, HIGH);
+  digitalWrite(redPin, LOW);
+  digitalWrite(greenPin, LOW);
+  digitalWrite(bluePin, LOW);
 
 }
 void loop() {
@@ -68,12 +69,12 @@ void loop() {
     // use the parseInt function to listen for a level:
     if (currentPin != 0){
       int brightness = Serial.parseInt();
-
+    
       // map the result to a level from 0 to 255
       // note: the reversal of the output values is because
       // you're using a common anode LED, and taking one of 
       // the cathodes HIGH actually turns that channel off:
-      brightness = map(brightness, 0, 100, 255, 0);
+      brightness = map(brightness, 0, 100, 0, 255);
 
       // set the brightness for this color:
       analogWrite(currentPin, brightness);    
