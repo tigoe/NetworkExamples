@@ -10,7 +10,7 @@
 	based on the core examples for socket.io and serialport.js
 		
 	created 5 Nov 2012
-	modified 19 Jan 2014
+	modified 17 Jun 2014
 	by Tom Igoe
 	
 */
@@ -19,7 +19,6 @@
 var serialport = require("serialport"),		// include the serialport library
 	SerialPort  = serialport.SerialPort,	   // make a local instance of serial
 	express = require('express'),				   // make an instance of express
-	open = require('open'),                   // used to open the browser
 	url = 'http://localhost:8080';            // URL to open in the browser
 	
 var app = express(),								   // start Express framework
@@ -36,8 +35,6 @@ console.log("opening serial port: " + portName);
 // listen for incoming requests on the server:
 server.listen(8080);								         
 console.log("Listening for new clients on port 8080");
-// open the app in a browser:
-open(url);                   
 
 // open the serial port. Uses the command line parameter:
 var myPort = new SerialPort(portName, { 

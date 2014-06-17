@@ -7,9 +7,8 @@
   	"name":"Tom Igoe"
    },
   "dependencies": {
-    "serialport": "1.1.x",
+    "serialport": "1.4.x",
     "express": "3.x", 
-    "open": ">=0.0.4"
   },
   "engines": {
     "node": "0.10.x",
