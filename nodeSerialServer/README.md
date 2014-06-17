@@ -15,12 +15,4 @@ Enter the following:
 
 You should end up with a new directory called node_modules, which will include socket.io, node-serialport, and express.js.
 
-To run it, enter:
-
-	node SerialServer.js
-
-You'll also find a SerialTest.js, ServerTest.js, and ListPorts.js, for testing purposes:
-
-* SerialTest.js - opens a serial port and listens for data
-* ServerTest.js - starts a server and says hello to clients
-* ListPorts.js - lists available serial ports. Note that on OSX, port names do not list correctly, due to an issue in node-serialport.
+You'll also find a series of files demonstrating serial functions, socket.io functions, and the combination of both.
