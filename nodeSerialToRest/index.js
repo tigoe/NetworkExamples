@@ -9,11 +9,10 @@
 		
 				
 	created 5 Nov 2012
-	modified 11 Feb 2014
+	modified 17 Jun 2014
 	by Tom Igoe
 	
 */
-
 
 var serialport = require("serialport"),		// include the serialport library
 	SerialPort  = serialport.SerialPort,	   // make a local instance of serial
@@ -49,13 +48,18 @@ var myPort = new SerialPort(portName, {
 */
 
 // respond to web GET requests with the index.html page:
-app.get('/', function (request, response) {
-  response.sendfile(__dirname + '/index.html');
-});
+app.get('/', getIndexPage);
   
-
 // take anything that begins with /output:
-app.get('/analog/*', function (request, response) {
+app.get('/analog/*', getAnalog);
+
+// get the index page:
+function getIndexPage (request, response) {
+  response.sendfile(__dirname + '/index.html');
+}
+
+// get an analog reading from the serial port:
+function getAnalog(request, response) {
   // the first parameter after /analog/ is the channel number:
   var channel = request.params[0];  
   console.log("getting channel: "+ channel + "...");
@@ -72,4 +76,4 @@ app.get('/analog/*', function (request, response) {
   	  		response.end();
   	  	});    
   }); 
-});
+}

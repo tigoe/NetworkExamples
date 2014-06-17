@@ -8,15 +8,17 @@
 			if (channelNum > 0 && channelNum < 6) {
 				// make a HTTP GET request, and run a function
 				// when it completes:
-				$.get("/analog/"+ channelNum, function(response) {
-					// set the sensorValue span's text
-					// using the response you get from the server:
-					sensorValue.innerHTML = response;
-				});
+				$.get("/analog/"+ channelNum, showSensorValue);
 			// if the channel number's not valid, let the user know
 			} else {
 				alert("choose a channel number between 1 and 5");
 			}
+		}
+		
+		function showSensorValue(response) {
+			// set the sensorValue span's text
+			// using the response you get from the server:
+			sensorValue.innerHTML = response;
 		}
 	 </script>
 	</head>

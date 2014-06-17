@@ -8,25 +8,28 @@ var app = require('express')(),						// start Express framework
   	io = require('socket.io').listen(server);		// filter the server using socket.io
 
 server.listen(8080);								// listen for incoming requests on the server
-  
+ 
+// set up your routes: 
+app.get('/', getIndexPage);
+app.get('/receive', getReceivePage);
+app.get('/send', getSendPage);
+
 // respond to web GET requests for the root with some links:
-app.get('/', function (request, response) {
+function getIndexPage (request, response) {
 	response.writeHead(200, {'Content-Type': 'text/html'}); 
 	response.write("<a href=\"/receive\">receive</a><br>");
 	response.write("<a href=\"/send\">send</a><br>");
 	response.end();
-});
-
+}
 // respond to web GET requests for the receive page:
-app.get('/receive', function (request, response) {
+function getReceivePage(request, response) {
   response.sendfile(__dirname + '/receive.html');
-})
-
+}
 
 // respond to web GET request for the send page:
-app.get('/send', function (request, response) {
+function getSendPage(request, response) {
   response.sendfile(__dirname + '/send.html');
-});
+}
 
 // listen for new socket.io connections:
 io.sockets.on('connection', function (socket) {
