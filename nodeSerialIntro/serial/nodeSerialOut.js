@@ -49,7 +49,7 @@ myPort.on('open', function() {
 		}	
 	}
 	// set an intercal to toggle LEDState every second:
-	setInterval(sendData, 1000);
+	setInterval(sendData, 10);
 
 });
 

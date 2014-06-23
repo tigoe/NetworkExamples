@@ -9,7 +9,7 @@
   "dependencies": {
     "serialport": ">=1.4.0",
     "socket.io": "0.9.x",
-    "express": "3.x",
+    "express": "3.x"
   },
   "engines": {
     "node": "0.10.x",
