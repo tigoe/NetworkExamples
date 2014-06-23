@@ -12,5 +12,5 @@ var lineReader = readline.createInterface({
 // when you get a newline in the stdin (ends with \n),
 // send a reply out the stdout:
 lineReader.on('line', function (data) {
-  console.log('You sent me: '+data);
+  console.log('You sent me: '+ data);
 });
