@@ -8,9 +8,6 @@
  serial port.  Any bytes from the Arduino's serial port
  are sent to the STDIN of the process.
 
- The circuit:
- * Arduino Yun with LED connected to pin 9
-
  created 21 Jun 2014
 
  by Tom Igoe
@@ -27,9 +24,8 @@ void setup() {
 
   // Wait until a Serial Monitor is connected.
   while (!Serial);
-  // This command line runs the WifiStatus script, (/usr/bin/pretty-wifi-info.lua), then
-  // sends the result to the grep command to look for a line containing the word
-  // "Signal:"  the result is passed to this sketch:
+  
+  // launch the echo.js script asynchronously:
   nodejs.runShellCommandAsynchronously("node /mnt/sda1/arduino/node/echo.js");
 
   Serial.println("Started process");
