@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <script type="text/javascript" src="js/zepto.min.js"></script>
 	 <script type="text/javascript">
 		function getData(channelNum) {
 			// if the channel number is valid:
-			if (channelNum > 0 && channelNum < 6) {
-				// make a HTTP GET request, and run a function
-				// when it completes:
-				$.get("/analog/"+ channelNum, showSensorValue);
+			if (channelNum >= 0 && channelNum < 6) {
+				// make a HTTP GET request:
+				var request = new XMLHttpRequest();
+				// GET /analog/channelNum, and make an asynchronous request:
+				request.open( "GET", '/analog/' + channelNum, true );
+				// close the request:
+				request.send( null );
+				// when the request gets a response, call showSensorValue with the result:
+				request.onreadystatechange = function() {
+					showSensorValue(request.responseText);
+				}
 			// if the channel number's not valid, let the user know
 			} else {
-				alert("choose a channel number between 1 and 5");
+				alert("choose a channel number between 0 and 5");
 			}
 		}
 		
@@ -25,7 +31,7 @@
 	<body>
 	Enter an analog channel number to read:
 	<input type="text" id="channel" size=2>	
-	<span id="sensorValue"></span><br>	
+	<span id="sensorValue"></span><br>
 	<input type="submit" value="submit" onclick="getData(channel.value);">
 
 	</body>

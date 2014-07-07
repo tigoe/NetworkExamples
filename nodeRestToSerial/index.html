@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <script type="text/javascript" src="js/zepto.min.js"></script>
-	 <script type="text/javascript">
+    <script type="text/javascript">
 		function setColor(slider, textbox) {
-			textbox.value= slider.value;
-			$.get("/output/"+ textbox.id + "/" + slider.value);
+			textbox.value = slider.value;
+			var request = new XMLHttpRequest();
+				// GET /output/color/level, and make an asynchronous request:
+				request.open( "GET", '/output/' + textbox.id + "/" + slider.value, true );
+				// close the request:
+				request.send( null );
 		}
 	 </script>
 	 
