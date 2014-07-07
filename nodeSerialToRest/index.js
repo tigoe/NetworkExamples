@@ -39,7 +39,6 @@ var myPort = new SerialPort(portName, {
    They only get called when the server gets incoming GET requests:
 */
 
-
 // get the index page:
 function sendIndexPage (request, response) {
   response.sendfile(__dirname + '/index.html');
