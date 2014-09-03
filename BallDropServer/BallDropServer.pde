@@ -49,13 +49,14 @@ long pointDelay = 3000;             // pause after each point
 boolean resultsAreOn = true;      // whether to show results
 
 Player lastPlayerHit;
-
+String serverIp;
 
 void setup() {
   // set up all the pong details:
   gameSetup();
   // Start the server:
   myServer = new Server(this, port);
+  serverIp = myServer.ip();
 }
 
 void gameSetup() {
@@ -296,7 +297,7 @@ void gameDraw() {
       gameOver = true;
       textAlign(CENTER);
       text("Game Over", width/2, height/2 - 30);
-      text("Log in to xxx.xxx.xxx.xxx  port 8080 to play", width/2, height/2);
+      text("Log in to " + serverIp + " port 8080 to play", width/2, height/2);
       text("l = left, r = right, u = up, d = down", width/2, height/2 + 30);
       text("x = exit", width/2, height/2 + 60);
       text("1 point for each time the ball hits a new paddle", width/2, height/2 + 90);
