@@ -502,11 +502,14 @@ void displayResults() {
     // get the next object in the ArrayList and convert it
     // to a Player:
     Player thisPlayer = (Player)sortedPlayers.get(p);
-
+    String label = thisPlayer.address;
+    if (!thisPlayer.name.equals("no name")) {
+      label = thisPlayer.name;
+    }
 
     textSize(24);
     textAlign(LEFT);
-    text("Player: " + thisPlayer.client.ip() + "\tScore: " + thisPlayer.myScore, 20, nextScoreLine); 
+    text("Player: " + label + " \tScore: " + thisPlayer.myScore, 20, nextScoreLine); 
     nextScoreLine += 30;
   }
 }
