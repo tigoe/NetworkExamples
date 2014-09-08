@@ -3,28 +3,27 @@ public class Player {
   // declare variables that belong to the object:
   float paddleH, paddleV, paddleVelocity;
   Client  client;
-  boolean showAddress;
   color paddleColor;
   int myScore;
   boolean gettingName = false;
-  String name = "";
+  String address = "";
+  String name = "no name";
+  int label = 1;    // default is to show IP address
 
   public Player (float hpos, float vpos, Client someClient) {
     // initialize the localinstance variables:
     paddleH = hpos;
     paddleVelocity = hpos;
     paddleV = vpos;
-    name = someClient.ip();
+    address = someClient.ip();
 
     int[] octets = int(split(someClient.ip(), "."));
     if (octets.length > 2) {
       paddleColor = color(64, 64, octets[3]);
-    } 
-    else {
+    } else {
       paddleColor = color(64, 64, 255);
     }
     client = someClient;
-    showAddress = true;
   }
 
   public void movePaddle(float howMuch) {
@@ -55,22 +54,28 @@ public class Player {
     rect(paddleH, paddleV, paddleWidth, paddleHeight); 
     fill(255);
 
-    // display the address of this player near its paddle
-    if (showAddress) {
+    // display the name or address of this player near its paddle
+    switch (label) {
+    case 0:    // nothing
+      break;
+    case 1:   // IP address
+      textSize(10); 
+      textAlign(CENTER);
+      text(address, paddleH, paddleV + paddleHeight/2 -1 );
+      break;
+    case 2:    // name
       textSize(10); 
       textAlign(CENTER);
       text(name, paddleH, paddleV + paddleHeight/2 -1 );
+      break;
     }
 
     if (abs(paddleVelocity) > 0) {
       movePaddle(paddleVelocity);
-      paddleVelocity= paddleVelocity/2 ;
+      paddleVelocity = paddleVelocity/2 ;
     }
   }
 }
-
-
-
 
 
 

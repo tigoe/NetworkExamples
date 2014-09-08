@@ -7,7 +7,7 @@
  ball drop game.
  
  Created sometime in 2007
- modified 10 Sept 2012
+ modified 8 Sept 2014
  by Tom Igoe
  
  */
@@ -36,17 +36,17 @@ float elasticity = -0.5;
 
 int topScore;     // scores for the top team and the bottom teams
 int hitDeck = 0;
-float paddleHeight = 10.0;         // vertical dimension of the paddles
-float paddleWidth = 90.0;          // horizontal dimension of the paddles
-float nextPaddleV;            // paddle position for the next player to be created
-float nextPaddleH;            // paddle horizontal position for the next player
+float paddleHeight = 10.0;     // vertical dimension of the paddles
+float paddleWidth = 90.0;      // horizontal dimension of the paddles
+float nextPaddleV;             // paddle position for the next player to be created
+float nextPaddleH;             // paddle horizontal position for the next player
 float highestPaddleV;          // highest a paddle can be
-boolean gameOver = false;           // whether or not a game is in progress
-long delayCounter;                  // a counter for the delay after 
+boolean gameOver = false;      // whether or not a game is in progress
+long delayCounter;             // a counter for the delay after 
 // a game is over
-long gameOverDelay = 8000;          // pause after each game
-long pointDelay = 3000;             // pause after each point
-boolean resultsAreOn = true;      // whether to show results
+long gameOverDelay = 8000;     // pause after each game
+long pointDelay = 3000;        // pause after each point
+boolean resultsAreOn = true;   // whether to show results
 
 Player lastPlayerHit;
 String serverIp;
@@ -93,9 +93,11 @@ void gameSetup() {
 }
 
 void draw() {
+  checkPlayerList();
   gameDraw();
   listenToClients();
 }
+
 
 // The ServerEvent message is generated when a new client 
 // connects to the server.
@@ -103,10 +105,8 @@ void serverEvent(Server someServer, Client someClient) {
   boolean isPlayer = false;
 
   if (someClient != null) {
-
-
     // iterate over the playerList:
-    for (int p = 0; p < playerList.size(); p++) {
+    for (int p = 0; p < playerList.size (); p++) {
       // get the next object in the ArrayList and convert it
       // to a Player:
 
@@ -125,6 +125,26 @@ void serverEvent(Server someServer, Client someClient) {
     // and add it to the playerList:
     if (!isPlayer) {
       makeNewPlayer(someClient);
+    }
+  }
+}
+
+/*
+  This method checks the player list and removes any
+ unexpectedly dead clients. Thanks to Peiqi Su for this fix.
+ */
+
+void checkPlayerList() {
+  for (int p = 0; p < playerList.size (); p++) {
+    Player thisPlayer = (Player)playerList.get(p);  
+    Boolean died = false;
+    try {
+      thisPlayer.client.ip();
+    }
+    catch (Exception e) {
+      println("a client dropped unexpectedly");
+      playerList.remove(p);
+      continue;
     }
   }
 }
@@ -179,7 +199,7 @@ void listenToClients() {
 
   // iterate over the playerList to figure out whose
   // client sent the message:
-  for (int p = 0; p < playerList.size(); p++) {
+  for (int p = 0; p < playerList.size (); p++) {
     // get the next object in the ArrayList and convert it
     // to a Player:
     Player thisPlayer = (Player)playerList.get(p);
@@ -211,17 +231,16 @@ void listenToClients() {
       switch (whatClientSaid) { 
 
       case '\n':
-      speakingPlayer.client.write("new name: " + speakingPlayer.name + "\r\n"); 
+        speakingPlayer.client.write("new name: " + speakingPlayer.name + "\r\n"); 
         speakingPlayer.gettingName = false;
         break;
-        case '=':
+      case '=':
       case '\r': // ignore the carriage return
         break;
       default:
         speakingPlayer.name += char(whatClientSaid);
       }
-    } 
-    else {
+    } else {
       switch (whatClientSaid) { 
         // If the client says "exit", disconnect it 
       case 'x':
@@ -253,14 +272,18 @@ void listenToClients() {
         break;
       case 'i':
         // toggle the address of this player:
-        speakingPlayer.showAddress = !speakingPlayer.showAddress;
+        if (speakingPlayer.label < 2) {
+          speakingPlayer.label++;
+        } else {
+          speakingPlayer.label = 0;
+        }
         break;
       case 'n':
         speakingPlayer.name = "";
         speakingPlayer.client.write("enter a new name, 16 characters max.:\r\n");
         speakingPlayer.gettingName = true;
         break;
-        default:
+      default:
         break;
       }
     }
@@ -270,7 +293,7 @@ void listenToClients() {
 void gameDraw() {
   background(0);
   // draw all the paddles
-  for (int p = 0; p < playerList.size(); p++) {
+  for (int p = 0; p < playerList.size (); p++) {
     Player thisPlayer = (Player)playerList.get(p);
     // show the paddle for this player:
     thisPlayer.showPaddle();
@@ -291,17 +314,11 @@ void gameDraw() {
 
     if (resultsAreOn) {
       displayResults();
-    } 
-    else {
+    } else {
       textSize(24);
       gameOver = true;
-      textAlign(CENTER);
       text("Game Over", width/2, height/2 - 30);
-      text("Log in to " + serverIp + " port 8080 to play", width/2, height/2);
-      text("l = left, r = right, u = up, d = down", width/2, height/2 + 30);
-      text("x = exit", width/2, height/2 + 60);
-      text("1 point for each time the ball hits a new paddle", width/2, height/2 + 90);
-      text("(minimum 2 players)", width/2, height/2 + 120);
+      showInstructions();
     }
   }
   // pause after each game:
@@ -318,16 +335,28 @@ void gameDraw() {
     // make sure there are at least two players:
     if (playerList.size() >=1) {
       ballInMotion = true;
-    } 
-    else {
+    } else {
       ballInMotion = false;
       textSize(24);
       textAlign(CENTER);
       text("Waiting for players", width/2, height/2 - 30);
+      showInstructions();
     }
   }
 }
 
+void showInstructions() {
+  textAlign(LEFT);
+  int leftMargin = 100;
+  text("Log in to " + serverIp + " port 8080 to play", leftMargin, height/2);
+  text("l = left, r = right, u = up, d = down", leftMargin, height/2 + 30);
+  text("i = display name/IP address", leftMargin, height/2 + 60);
+  text("n=XXXXX\\n - set name (n,= and \\n are the terminators.", leftMargin, height/2 + 90);
+  text("                      Everything between is the name)", leftMargin, height/2 + 120);
+  text("x = exit", leftMargin, height/2 + 150);
+  text("1 point for each time the ball hits a new paddle", leftMargin, height/2 + 180);
+  text("(minimum 2 players)", leftMargin, height/2 + 210);
+}
 void moveBall() {
 
   // local variable for calculating height position:
@@ -339,7 +368,7 @@ void moveBall() {
   ballDirectionV = ballDirectionV + gravity;
 
   // Check to see if the ball contacts any paddles:
-  for (int p = 0; p < playerList.size(); p++) {
+  for (int p = 0; p < playerList.size (); p++) {
     // get the player to check:
     Player thisPlayer = (Player)playerList.get(p);
 
@@ -374,8 +403,7 @@ void moveBall() {
             ballDirectionH = constrain(ballDirectionH + (thisPlayer.paddleVelocity/10.0), 0.1, 2.0);
           }
         }
-      } 
-      else {     // ballDirectionV < 0
+      } else {     // ballDirectionV < 0
         // ball is ascending 
         if ((newBallPosV <= paddleBottom) && (ballPosV >= paddleBottom)) {
           // if it's in or below the paddle, put it on bottom
@@ -460,7 +488,7 @@ void displayResults() {
   // iterate over the playerList:
   while (sortedPlayers.size () < playerList.size()) {
 
-    for (int p = 0; p < playerList.size(); p++) {
+    for (int p = 0; p < playerList.size (); p++) {
       Player thisPlayer = (Player)playerList.get(p);      
       if (thisPlayer.myScore == counter) {
         sortedPlayers.add(thisPlayer);
@@ -469,7 +497,7 @@ void displayResults() {
     counter++;
   }
 
-  for (int p = 0; p < sortedPlayers.size(); p++) {
+  for (int p = 0; p < sortedPlayers.size (); p++) {
 
     // get the next object in the ArrayList and convert it
     // to a Player:

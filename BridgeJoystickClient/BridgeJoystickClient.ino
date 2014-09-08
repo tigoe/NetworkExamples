@@ -85,7 +85,7 @@ void loop() {
     } // if the client's disconnected, try to connect:
     else {
       Serial.println("connecting");
-      telnet.runShellCommandAsynchronously("telnet 128.122.151.215 8080");
+      telnet.runShellCommandAsynchronously("telnet 192.168.0.23 8080");
     }
   }
 
