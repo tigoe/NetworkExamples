@@ -14,10 +14,14 @@
 var http = require("http"),							// require HTTP library
 	server = http.createServer(respondToClient);	// create a server with a callback
 
+var ip = require("ip");
+console.log( ip.address() );
+
 server.listen(8080);				// start the server listening
 
 // let the user know you started:
-console.log('Server is listening to http://localhost on port 8080');
+console.log('Server is listening on port 8080');
+
 
 // this is the callback function that's called
 // whenever a client makes a request:
