@@ -35,6 +35,14 @@ var myPort = new SerialPort(portName, {
 	parser: serialport.parsers.readline("\r\n") 
 });
 
+
+// respond to web GET requests with the index.html page:
+app.get('/', sendIndexPage);
+  
+// take anything that begins with /output:
+app.get('/analog/*', getAnalogReading);
+
+
 /* The rest of the functions are event-driven. 
    They only get called when the server gets incoming GET requests:
 */
@@ -46,26 +54,20 @@ function sendIndexPage (request, response) {
 
 // get an analog reading from the serial port:
 function getAnalogReading(request, response) {
-  // the first parameter after /analog/ is the channel number:
-  var channel = request.params[0];  
-  console.log("getting channel: "+ channel + "...");
-
-  // send it out the serial port and wait for a response:
-  myPort.write(channel, function() {
+	// the first parameter after /analog/ is the channel number:
+	var channel = request.params[0];  
+	console.log("getting channel: "+ channel + "...");
+	
+	// send it out the serial port and wait for a response:
+	myPort.write(channel, function() {
 		// send an HTTP header to the client:
 		response.writeHead(200, {'Content-Type': 'text/html'}); 
-
+		
 		// when you get a response from the serial port, write it out to the client: 
 		myPort.on('data', function(data) {
-  	  		// send the data and close the connection:
-  	  		response.write(data);
-  	  		response.end();
-  	  	});    
-  }); 
+			// send the data and close the connection:
+			response.write(data);
+			response.end();
+		});    
+	}); 
 }
-
-// respond to web GET requests with the index.html page:
-app.get('/', sendIndexPage);
-  
-// take anything that begins with /output:
-app.get('/analog/*', getAnalogReading);

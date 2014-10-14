@@ -11,7 +11,7 @@ void loop() {
     // parse incoming data for a number:
     int channel = Serial.parseInt();
     // if the number's between 0 and 6:
-    if (channel > 0 && channel < 6 ) {
+    if (channel >= 0 && channel < 6 ) {
       // read the corresponding analog input:
       int sensor = analogRead(channel);
       // print the result back to the server:
