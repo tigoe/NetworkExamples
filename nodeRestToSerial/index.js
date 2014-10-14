@@ -42,7 +42,7 @@ var myPort = new SerialPort(portName, {
 
 // this function responds to a GET request with the index page:
 function sendIndexPage(request, response) {
-  response.sendfile(__dirname + '/index.html');
+  response.sendfile(__dirname + '/index2.html');
 }
 
 function sendToSerial(request, response) {

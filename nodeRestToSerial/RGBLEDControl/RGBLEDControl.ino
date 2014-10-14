@@ -21,18 +21,20 @@
  */
 
 // constants to hold the output pin numbers:
-const int greenPin = 11;
+const int greenPin = 9;
 const int bluePin = 10;
-const int redPin = 9;
+const int redPin = 11;
 
 void setup() {
   // initiate serial communication:
   Serial.begin(9600);
-
+  Serial.setTimeout(10);
   // initialize the LED pins as outputs:
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
+  pinMode(8, OUTPUT);
+  digitalWrite(8, LOW);
   // set the color pins high to turn off the LED:
   digitalWrite(redPin, LOW);
   digitalWrite(greenPin, LOW);
@@ -67,7 +69,7 @@ void loop() {
     if (currentPin != 0) {
       int brightness = Serial.parseInt();
       // map the result to a level from 0 to 255
-       brightness = map(brightness, 0, 100, 0, 255);
+      brightness = map(brightness, 0, 100, 0, 255);
 
       // set the brightness for this color:
       analogWrite(currentPin, brightness);
