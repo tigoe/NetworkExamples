@@ -23,12 +23,12 @@ function getIndexPage (request, response) {
 }
 // respond to web GET requests for the receive page:
 function getReceivePage(request, response) {
-  response.sendfile(__dirname + '/receive.html');
+  response.sendFile(__dirname + '/receive.html');
 }
 
 // respond to web GET request for the send page:
 function getSendPage(request, response) {
-  response.sendfile(__dirname + '/send.html');
+  response.sendFile(__dirname + '/send.html');
 }
 
 // listen for new socket.io connections:

@@ -10,11 +10,10 @@ console.log('Server is listening on port 8080');
 // whenever a client makes a request:
 function respondToClient(request, response) {  
 	console.log("request from: ");
-	console.log(request.connection.remoteAddress);
-		
+	console.log(request.connection.remoteAddress);		
 	console.log("URL:");
 	console.log(request.url);
-		
+	
 	// write back to the client:
 	response.writeHead(200, {"Content-Type": "text/html"});  
 	response.write("Hello, " + request.connection.remoteAddress);

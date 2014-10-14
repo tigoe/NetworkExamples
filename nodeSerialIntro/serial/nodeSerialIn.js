@@ -31,9 +31,9 @@ var serialport = require("serialport"),	// include the serialport library
 
 // open the serial port. The portname comes from the command line:
 var myPort = new SerialPort(portName, { 
-	baudRate: 9600,
+	baudRate: 9600 // ,
 	// look for return and newline at the end of each data packet:
-	parser: serialport.parsers.readline("\r\n")
+	//parser: serialport.parsers.readline("\r\n")
 });
  
 // called when the serial port opens:
@@ -44,7 +44,7 @@ myPort.on('open', function() {
 	// called when there's new incoming serial data:  
 	myPort.on('data', function (data) {
 		// for debugging, you should see this in Terminal:
-		console.log(data);
+		console.log(""+ data);
 	});
 });
 
