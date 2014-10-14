@@ -41,7 +41,7 @@ var myPort = new SerialPort(portName, {
 
 // get the index page:
 function sendIndexPage (request, response) {
-  response.sendfile(__dirname + '/index2.html');
+  response.sendfile(__dirname + '/index.html');
 }
 
 // get an analog reading from the serial port:
@@ -69,4 +69,3 @@ app.get('/', sendIndexPage);
   
 // take anything that begins with /output:
 app.get('/analog/*', getAnalogReading);
-
