@@ -3,8 +3,12 @@
  Bridge to dweet.io
  
  Uses Arduino Bridge library ato store sensor data on dweet.io
+ 
+ Change "your-dweet-name" to something unique to you. Make sure your Yun
+ is on the internet. no other changes needed.
+
  To see the results, go to http://dweet.io/follow/your-dweet-name
- (change your-dweet-name to something unique to you) 
+ (change the name to your name, of course)
 
  created 15 Oct 2014
  by Tom Igoe
