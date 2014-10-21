@@ -1,0 +1,219 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 warn package.json restToSerial@0.5.0 No repository field.
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ '/Users/tigoe/Documents/github/NetworkExamples/nodeRestToSerial',
+6 verbose install   [ 'serialport', 'servi' ] ]
+7 info preinstall restToSerial@0.5.0
+8 verbose readDependencies using package.json deps
+9 verbose cache add [ 'serialport@1.4.x', null ]
+10 verbose cache add name=undefined spec="serialport@1.4.x" args=["serialport@1.4.x",null]
+11 verbose parsed url { protocol: null,
+11 verbose parsed url   slashes: null,
+11 verbose parsed url   auth: null,
+11 verbose parsed url   host: null,
+11 verbose parsed url   port: null,
+11 verbose parsed url   hostname: null,
+11 verbose parsed url   hash: null,
+11 verbose parsed url   search: null,
+11 verbose parsed url   query: null,
+11 verbose parsed url   pathname: 'serialport@1.4.x',
+11 verbose parsed url   path: 'serialport@1.4.x',
+11 verbose parsed url   href: 'serialport@1.4.x' }
+12 verbose cache add [ 'servi@>=0.5.0', null ]
+13 verbose cache add name=undefined spec="servi@>=0.5.0" args=["servi@>=0.5.0",null]
+14 verbose parsed url { protocol: null,
+14 verbose parsed url   slashes: null,
+14 verbose parsed url   auth: null,
+14 verbose parsed url   host: null,
+14 verbose parsed url   port: null,
+14 verbose parsed url   hostname: null,
+14 verbose parsed url   hash: null,
+14 verbose parsed url   search: null,
+14 verbose parsed url   query: null,
+14 verbose parsed url   pathname: 'servi@%3E=0.5.0',
+14 verbose parsed url   path: 'servi@%3E=0.5.0',
+14 verbose parsed url   href: 'servi@%3E=0.5.0' }
+15 verbose cache add name="serialport" spec="1.4.x" args=["serialport","1.4.x"]
+16 verbose parsed url { protocol: null,
+16 verbose parsed url   slashes: null,
+16 verbose parsed url   auth: null,
+16 verbose parsed url   host: null,
+16 verbose parsed url   port: null,
+16 verbose parsed url   hostname: null,
+16 verbose parsed url   hash: null,
+16 verbose parsed url   search: null,
+16 verbose parsed url   query: null,
+16 verbose parsed url   pathname: '1.4.x',
+16 verbose parsed url   path: '1.4.x',
+16 verbose parsed url   href: '1.4.x' }
+17 verbose addNamed [ 'serialport', '1.4.x' ]
+18 verbose addNamed [ null, '>=1.4.0-0 <1.5.0-0' ]
+19 verbose cache add name="servi" spec=">=0.5.0" args=["servi",">=0.5.0"]
+20 verbose parsed url { protocol: null,
+20 verbose parsed url   slashes: null,
+20 verbose parsed url   auth: null,
+20 verbose parsed url   host: null,
+20 verbose parsed url   port: null,
+20 verbose parsed url   hostname: null,
+20 verbose parsed url   hash: null,
+20 verbose parsed url   search: null,
+20 verbose parsed url   query: null,
+20 verbose parsed url   pathname: '%3E=0.5.0',
+20 verbose parsed url   path: '%3E=0.5.0',
+20 verbose parsed url   href: '%3E=0.5.0' }
+21 verbose addNamed [ 'servi', '>=0.5.0' ]
+22 verbose addNamed [ null, '>=0.5.0' ]
+23 silly lockFile ab1a05c6-serialport-1-4-x serialport@1.4.x
+24 verbose lock serialport@1.4.x /Users/tigoe/.npm/ab1a05c6-serialport-1-4-x.lock
+25 silly lockFile 4cc48d69-servi-0-5-0 servi@>=0.5.0
+26 verbose lock servi@>=0.5.0 /Users/tigoe/.npm/4cc48d69-servi-0-5-0.lock
+27 silly addNameRange { name: 'serialport',
+27 silly addNameRange   range: '>=1.4.0-0 <1.5.0-0',
+27 silly addNameRange   hasData: false }
+28 silly addNameRange { name: 'servi', range: '>=0.5.0', hasData: false }
+29 verbose request where is /serialport
+30 verbose request registry https://registry.npmjs.org/
+31 verbose request id 854ba5622d04a949
+32 verbose url raw /serialport
+33 verbose url resolving [ 'https://registry.npmjs.org/', './serialport' ]
+34 verbose url resolved https://registry.npmjs.org/serialport
+35 verbose request where is https://registry.npmjs.org/serialport
+36 info trying registry request attempt 1 at 13:16:41
+37 verbose etag "6GZS28CQYYAS6ICODDMR7LLF8"
+38 http GET https://registry.npmjs.org/serialport
+39 verbose request where is /servi
+40 verbose request registry https://registry.npmjs.org/
+41 verbose url raw /servi
+42 verbose url resolving [ 'https://registry.npmjs.org/', './servi' ]
+43 verbose url resolved https://registry.npmjs.org/servi
+44 verbose request where is https://registry.npmjs.org/servi
+45 info trying registry request attempt 1 at 13:16:41
+46 verbose etag "BF26W2F1EAW9DEDUX9EXS4UI8"
+47 http GET https://registry.npmjs.org/servi
+48 http 304 https://registry.npmjs.org/servi
+49 silly registry.get cb [ 304,
+49 silly registry.get   { date: 'Tue, 21 Oct 2014 17:16:41 GMT',
+49 silly registry.get     server: 'Apache',
+49 silly registry.get     via: '1.1 varnish',
+49 silly registry.get     'last-modified': 'Tue, 21 Oct 2014 17:16:41 GMT',
+49 silly registry.get     'cache-control': 'max-age=60',
+49 silly registry.get     etag: '"BF26W2F1EAW9DEDUX9EXS4UI8"',
+49 silly registry.get     age: '32',
+49 silly registry.get     'x-served-by': 'cache-iad2133-IAD',
+49 silly registry.get     'x-cache': 'HIT',
+49 silly registry.get     'x-cache-hits': '1',
+49 silly registry.get     'x-timer': 'S1413911801.735100,VS0,VE0',
+49 silly registry.get     vary: 'Accept',
+49 silly registry.get     'content-length': '0',
+49 silly registry.get     'keep-alive': 'timeout=10, max=50',
+49 silly registry.get     connection: 'Keep-Alive' } ]
+50 verbose etag https://registry.npmjs.org/servi from cache
+51 http 304 https://registry.npmjs.org/serialport
+52 silly registry.get cb [ 304,
+52 silly registry.get   { date: 'Tue, 21 Oct 2014 17:16:41 GMT',
+52 silly registry.get     server: 'Apache',
+52 silly registry.get     via: '1.1 varnish',
+52 silly registry.get     'last-modified': 'Tue, 21 Oct 2014 17:16:41 GMT',
+52 silly registry.get     'cache-control': 'max-age=60',
+52 silly registry.get     etag: '"6GZS28CQYYAS6ICODDMR7LLF8"',
+52 silly registry.get     age: '32',
+52 silly registry.get     'x-served-by': 'cache-iad2128-IAD',
+52 silly registry.get     'x-cache': 'HIT',
+52 silly registry.get     'x-cache-hits': '1',
+52 silly registry.get     'x-timer': 'S1413911801.744523,VS0,VE0',
+52 silly registry.get     vary: 'Accept',
+52 silly registry.get     'content-length': '0',
+52 silly registry.get     'keep-alive': 'timeout=10, max=50',
+52 silly registry.get     connection: 'Keep-Alive' } ]
+53 verbose etag https://registry.npmjs.org/serialport from cache
+54 silly addNameRange number 2 { name: 'serialport',
+54 silly addNameRange   range: '>=1.4.0-0 <1.5.0-0',
+54 silly addNameRange   hasData: true }
+55 silly addNameRange versions [ 'serialport',
+55 silly addNameRange   [ '0.1.0',
+55 silly addNameRange     '0.1.1',
+55 silly addNameRange     '0.1.3',
+55 silly addNameRange     '0.2.0',
+55 silly addNameRange     '0.2.2',
+55 silly addNameRange     '0.2.3',
+55 silly addNameRange     '0.2.4',
+55 silly addNameRange     '0.2.5',
+55 silly addNameRange     '0.2.6',
+55 silly addNameRange     '0.2.7',
+55 silly addNameRange     '0.2.8',
+55 silly addNameRange     '0.2.9',
+55 silly addNameRange     '0.3.0',
+55 silly addNameRange     '0.6.0',
+55 silly addNameRange     '0.6.1',
+55 silly addNameRange     '0.6.2',
+55 silly addNameRange     '0.6.3',
+55 silly addNameRange     '0.6.5',
+55 silly addNameRange     '0.6.6',
+55 silly addNameRange     '0.6.7',
+55 silly addNameRange     '0.7.0',
+55 silly addNameRange     '0.7.1',
+55 silly addNameRange     '0.7.2',
+55 silly addNameRange     '0.7.3',
+55 silly addNameRange     '0.7.4',
+55 silly addNameRange     '0.7.5',
+55 silly addNameRange     '1.0.0',
+55 silly addNameRange     '1.0.1',
+55 silly addNameRange     '1.0.2',
+55 silly addNameRange     '1.0.3',
+55 silly addNameRange     '1.0.4',
+55 silly addNameRange     '1.0.5',
+55 silly addNameRange     '1.0.6',
+55 silly addNameRange     '1.0.7',
+55 silly addNameRange     '1.0.8',
+55 silly addNameRange     '1.1.0',
+55 silly addNameRange     '1.1.1',
+55 silly addNameRange     '1.1.3',
+55 silly addNameRange     '1.2.0',
+55 silly addNameRange     '1.2.1',
+55 silly addNameRange     '1.2.2',
+55 silly addNameRange     '1.2.3',
+55 silly addNameRange     '1.2.4',
+55 silly addNameRange     '1.2.5',
+55 silly addNameRange     '1.3.0',
+55 silly addNameRange     '1.3.1',
+55 silly addNameRange     '1.4.0',
+55 silly addNameRange     '1.4.1',
+55 silly addNameRange     '1.4.2',
+55 silly addNameRange     '1.4.5',
+55 silly addNameRange     '1.4.6' ] ]
+56 verbose addNamed [ 'serialport', '1.4.6' ]
+57 verbose addNamed [ '1.4.6', '1.4.6' ]
+58 silly lockFile 12e7db8b-serialport-1-4-6 serialport@1.4.6
+59 verbose lock serialport@1.4.6 /Users/tigoe/.npm/12e7db8b-serialport-1-4-6.lock
+60 silly addNameRange number 2 { name: 'servi', range: '>=0.5.0', hasData: true }
+61 silly addNameRange versions [ 'servi',
+61 silly addNameRange   [ '0.0.1',
+61 silly addNameRange     '0.0.2-alpha',
+61 silly addNameRange     '0.0.3',
+61 silly addNameRange     '0.0.4',
+61 silly addNameRange     '0.0.6',
+61 silly addNameRange     '0.0.7',
+61 silly addNameRange     '0.0.8' ] ]
+62 silly lockFile 4cc48d69-servi-0-5-0 servi@>=0.5.0
+63 silly lockFile 4cc48d69-servi-0-5-0 servi@>=0.5.0
+64 silly lockFile 12e7db8b-serialport-1-4-6 serialport@1.4.6
+65 silly lockFile 12e7db8b-serialport-1-4-6 serialport@1.4.6
+66 silly lockFile ab1a05c6-serialport-1-4-x serialport@1.4.x
+67 silly lockFile ab1a05c6-serialport-1-4-x serialport@1.4.x
+68 error notarget No compatible version found: servi@'>=0.5.0'
+68 error notarget Valid install targets:
+68 error notarget ["0.0.1","0.0.2-alpha","0.0.3","0.0.4","0.0.6","0.0.7","0.0.8"]
+68 error notarget
+68 error notarget This is most likely not a problem with npm itself.
+68 error notarget In most cases you or one of your dependencies are requesting
+68 error notarget a package version that doesn't exist.
+69 error System Darwin 13.4.0
+70 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+71 error cwd /Users/tigoe/Documents/github/NetworkExamples/nodeRestToSerial
+72 error node -v v0.10.32
+73 error npm -v 1.4.28
+74 error code ETARGET
+75 verbose exit [ 1, true ]

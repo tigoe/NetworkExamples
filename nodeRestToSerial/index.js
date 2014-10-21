@@ -3,21 +3,36 @@
 	a node.js app to read take requests and send as serial data
 	requires:
 		* node.js (http://nodejs.org/)
-		* express.js (http://expressjs.com/)
+		* servi.js (https://github.com/antiboredom/servi.js)
 		* serialport.js (https://github.com/voodootikigod/node-serialport)
 	
 	To launch this, type 'node index.js portname' on the commandline, where
 	portname is the name of your serial port.
 		
 	created 5 Nov 2012
-	modified 7 Jul 2014
+	modified 21 Oct 2014
 	by Tom Igoe
 */
 
 var serialport = require("serialport"),		// include the serialport library
 	SerialPort  = serialport.SerialPort,	   // make a local instance of serial
-	express = require('express'),				   // make an instance of express
-	app = express();								   // start Express framework
+	servi = require('servi'),		// include the servi library
+	app = new servi(false);		// servi instance
+
+// configure the server's behavior:
+app.port(8080);						// port number to run the server on
+app.serveFiles("public");			// serve all static HTML files from /public
+
+
+// respond to web GET requests for the index.html page:
+app.route('/', sendIndexPage);
+app.route('/index*', sendIndexPage);
+// take anything that begins with /output as an LED request:
+app.route('/output/:color/:brightness', sendToSerial);
+
+// now that everything is configured, start the server:
+app.start();	
+   
 
 
 // the third word of the command line command is serial port name:
@@ -41,26 +56,17 @@ var myPort = new SerialPort(portName, {
 */
 
 // this function responds to a GET request with the index page:
-function sendIndexPage(request, response) {
-  response.sendfile(__dirname + '/index2.html');
+function sendIndexPage(request) {
+  request.serveFile('/index.html');
 }
 
-function sendToSerial(request, response) {
-  // the route is the first parameter of the URL request:
-  var brightnessCommand = request.params[0];  
+function sendToSerial(request) {
+  // get the parameters from the URL:
+  var brightnessCommand = request.params.color + request.params.brightness;
   console.log("received "+ brightnessCommand);
 
   // send it out the serial port:
   myPort.write(brightnessCommand);
-  // send an HTTP header to the client:
-  response.writeHead(200, {'Content-Type': 'text/html'});
   // send the data and close the connection:
-  response.end(brightnessCommand);
+  request.respond(brightnessCommand);
 }
-
-// respond to web GET requests for the index.html page:
-app.get('/', sendIndexPage);
-app.get('/index*', sendIndexPage);
-
-// take anything that begins with /output as an LED request:
-app.get('/output/*', sendToSerial);
