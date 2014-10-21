@@ -3,21 +3,31 @@
 	a node.js app to read take requests and reply with serial data
 	requires:
 		* node.js (http://nodejs.org/)
-		* express.js (http://expressjs.com/)
+		* servi.js (https://github.com/antiboredom/servi.js)
 		* serialport.js (https://github.com/voodootikigod/node-serialport)
 		
 				
 	created 5 Nov 2012
-	modified 7 Jul 2014
+	modified 21 Oct 2014
 	by Tom Igoe
 	
 */
 
 var serialport = require("serialport"),		// include the serialport library
 	SerialPort  = serialport.SerialPort,	   // make a local instance of serial
-	express = require('express'),				   // make an instance of express
-	app = express();								   // start Express framework
+	servi = require('servi'),						// include the servi library
+	app = new servi(false);							// servi instance
 
+// configure the server's behavior:
+app.port(8080);						// port number to run the server on
+app.serveFiles("public");			// serve all static HTML files from /public
+// respond to calls for the index page:
+app.route('/', sendIndexPage);
+// take anything that begins with /output:
+app.route('/analog/:channel', getAnalogReading);
+
+// now that everything is configured, start the server:
+app.start();	
 
 // the third word of the command line command is serial port name:
 var portName = process.argv[2];				  
@@ -36,38 +46,27 @@ var myPort = new SerialPort(portName, {
 });
 
 
-// respond to web GET requests with the index.html page:
-app.get('/', sendIndexPage);
-  
-// take anything that begins with /output:
-app.get('/analog/*', getAnalogReading);
-
-
 /* The rest of the functions are event-driven. 
    They only get called when the server gets incoming GET requests:
 */
 
-// get the index page:
-function sendIndexPage (request, response) {
-  response.sendfile(__dirname + '/index.html');
+// this function responds to a GET request with the index page:
+function sendIndexPage(request) {
+  request.serveFile('/index.html');
 }
 
 // get an analog reading from the serial port:
-function getAnalogReading(request, response) {
-	// the first parameter after /analog/ is the channel number:
-	var channel = request.params[0];  
+function getAnalogReading(request) {
+	// the parameter after /analog/ is the channel number:
+	var channel = request.params.channel;  
 	console.log("getting channel: "+ channel + "...");
 	
 	// send it out the serial port and wait for a response:
-	myPort.write(channel, function() {
-		// send an HTTP header to the client:
-		response.writeHead(200, {'Content-Type': 'text/html'}); 
-		
+	myPort.write(channel, function() {		
 		// when you get a response from the serial port, write it out to the client: 
 		myPort.on('data', function(data) {
 			// send the data and close the connection:
-			response.write(data);
-			response.end();
+			request.respond(data);
 		});    
 	}); 
 }
