@@ -40,8 +40,7 @@ var portName = process.argv[2];
 // print out the port you're listening on:
 console.log("opening serial port: " + portName);	
 
-// listen for incoming requests on the server:
-app.listen(8080);								         
+						         
 console.log("Listening for new clients on port 8080");
 
 // open the serial port. Uses the command line parameter:
@@ -70,3 +69,15 @@ function sendToSerial(request) {
   // send the data and close the connection:
   request.respond(brightnessCommand);
 }
+
+
+
+
+
+
+
+
+
+
+
+
