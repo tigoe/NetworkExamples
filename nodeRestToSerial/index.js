@@ -32,16 +32,13 @@ app.route('/output/:color/:brightness', sendToSerial);
 
 // now that everything is configured, start the server:
 app.start();	
-   
+console.log("Listening for new clients on port 8080");
 
-
+ 
 // the third word of the command line command is serial port name:
 var portName = process.argv[2];				  
 // print out the port you're listening on:
 console.log("opening serial port: " + portName);	
-
-						         
-console.log("Listening for new clients on port 8080");
 
 // open the serial port. Uses the command line parameter:
 var myPort = new SerialPort(portName, { 
@@ -69,15 +66,3 @@ function sendToSerial(request) {
   // send the data and close the connection:
   request.respond(brightnessCommand);
 }
-
-
-
-
-
-
-
-
-
-
-
-
