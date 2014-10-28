@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script>	
+	 var socket = new WebSocket('ws://localhost:8080');
+	 var brightness = 0;		// value to send to the server
+
+   socket.onmessage = function (event) {
+     textDisplay.innerHTML = event.data;
+   };
+		 		
+	// send data back to the server:	
+	function sendData() {
+	// make sure the port is open before you write to it:
+		socket.send(brightness);
+		textDisplay.innerHTML = brightness;
+		if (brightness < 255) {
+			brightness+= 10;
+		} else {
+			brightness = 0;
+		}
+	}	
+	
+	setInterval(sendData, 1000);
+		
+ 	</script>
+
+	</head>
+	<body>
+	And the current brightness is:
+	<div id="textDisplay">Text will show up here</div>
+	</body>
+</html>

@@ -1,11 +1,12 @@
 /*
-	Tests express and socket.io without serial
+	Tests express and websockets without serial
 
 */
 
 var app = require('express')(),						// start Express framework
   	server = require('http').createServer(app),	// start an HTTP server
-  	io = require('socket.io').listen(server);		// filter the server using socket.io
+ 	WebSocketServer = require('ws').Server,
+   socketServer = new WebSocketServer({server: server});
 
 server.listen(8080);								// listen for incoming requests on the server
  
@@ -16,28 +17,26 @@ app.get('/send', getSendPage);
 
 // respond to web GET requests for the root with some links:
 function getIndexPage (request, response) {
-	response.writeHead(200, {'Content-Type': 'text/html'}); 
-	response.write("<a href=\"/receive\">receive</a><br>");
-	response.write("<a href=\"/send\">send</a><br>");
-	response.end();
+	 response.sendFile(__dirname + '/public/index.html');
 }
 // respond to web GET requests for the receive page:
 function getReceivePage(request, response) {
-  response.sendFile(__dirname + '/receive.html');
+  response.sendFile(__dirname + '/public/receive.html');
 }
 
 // respond to web GET request for the send page:
 function getSendPage(request, response) {
-  response.sendFile(__dirname + '/send.html');
+  response.sendFile(__dirname + '/public/send.html');
 }
 
+
 // listen for new socket.io connections:
-io.sockets.on('connection', function (socket) {
+socketServer.on('connection', function (socket) {
 	// send something to the web client with the data:
-	socket.emit('serverData', "Hello");
+	socket.send( "Hello, the date is " + new Date() );
 	
 		// if the client sends you data, act on it:
-	socket.on('clientData', function(data) {
+	socket.on('message', function(data) {
 		console.log('received from client: ' +data);
 	});
 });
