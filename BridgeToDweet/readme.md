@@ -1,0 +1,1 @@
+This example has been moved to my [Bridge Examples repository](https://github.com/tigoe/BridgeExamples)
