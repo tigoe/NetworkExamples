@@ -52,6 +52,10 @@ Player lastPlayerHit;
 String serverIp;
 
 void setup() {
+  // set the window size:
+  size(800, 600);
+  // set the frame rate:
+  frameRate(90);
   // set up all the pong details:
   gameSetup();
   // Start the server:
@@ -60,11 +64,6 @@ void setup() {
 }
 
 void gameSetup() {
-
-  // set the window size:
-  size(800, 600);
-  // set the frame rate:
-  frameRate(90);
   // create a font with the third font available to the system:
   PFont myFont = createFont(PFont.list()[1], 18);
   textFont(myFont);
@@ -517,4 +516,3 @@ void displayResults() {
 void keyReleased() {
   resultsAreOn = !resultsAreOn;
 }
-
